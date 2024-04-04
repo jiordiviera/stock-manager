@@ -9,11 +9,16 @@ use Filament\Resources\Pages\EditRecord;
 class EditProduit extends EditRecord
 {
     protected static string $resource = ProduitResource::class;
+    protected static ?string $title='Produit';
 
-    protected function getHeaderActions(): array
+    protected function getFormActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            $this->getSaveFormAction()
+            ->label('Sauvegarder'),
+            $this->getCancelFormAction()
+            ->label('Annuler'),
         ];
     }
+
 }

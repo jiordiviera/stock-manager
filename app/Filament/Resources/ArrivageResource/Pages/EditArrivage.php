@@ -9,11 +9,17 @@ use Filament\Resources\Pages\EditRecord;
 class EditArrivage extends EditRecord
 {
     protected static string $resource = ArrivageResource::class;
+    protected static ?string $title='Arrivages';
 
-    protected function getHeaderActions(): array
+    protected function getFormActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            $this->getSaveFormAction()
+                ->label('Sauvegarder'),
+            $this->getCancelFormAction()
+                ->label('Annuler'),
         ];
     }
+
+
 }

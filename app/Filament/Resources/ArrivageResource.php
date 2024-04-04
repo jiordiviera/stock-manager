@@ -10,8 +10,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ArrivageResource extends Resource
 {
@@ -24,9 +22,14 @@ class ArrivageResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('produit_id')
+                    ->label('Nom du produit')
                     ->relationship('produit', 'nom')
+                    ->placeholder('Choisir un produit')
                     ->required(),
                 Forms\Components\TextInput::make('quantite_arrivée')
+                    ->label('Quantité de produit arrivée')
+                    ->placeholder('Entrez la quantité de produit arrivée ici')
+                    ->suffix('pièce(s)')
                     ->required()
                     ->numeric(),
             ]);
@@ -35,8 +38,10 @@ class ArrivageResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->emptyStateHeading('Aucun Arrivage')
             ->columns([
-                Tables\Columns\TextColumn::make('produit_id')
+                Tables\Columns\TextColumn::make('produit.nom')
+                    ->label('Produit')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('quantite_arrivée')
@@ -55,12 +60,15 @@ class ArrivageResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\EditAction::make()
+                    ->label('Modifier'),
+                /*Tables\Actions\DeleteAction::make()
+                    ->label('supprimer')
+                    ->modalHeading('Supprimer ce produit')
+                    ->modalDescription('Êtes vous sur de vouloir supprimer ces produits.')
+                    ->modalSubmitActionLabel('Oui, je le veux')
+                    ->modalCancelActionLabel('Annuler'),*/
+
             ]);
     }
 
