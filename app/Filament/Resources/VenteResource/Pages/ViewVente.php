@@ -4,17 +4,16 @@ namespace App\Filament\Resources\VenteResource\Pages;
 
 use App\Filament\Resources\VenteResource;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\ViewRecord;
 
-class EditVente extends EditRecord
+class ViewVente extends ViewRecord
 {
     protected static string $resource = VenteResource::class;
-    protected static ?string $title= 'Modifier Vente';
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\EditAction::make(),
         ];
     }
 }

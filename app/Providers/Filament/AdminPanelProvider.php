@@ -5,14 +5,11 @@ namespace App\Providers\Filament;
 use App\Filament\Pages\TableauDeBord;
 use App\Filament\Resources\ArrivageResource\Widgets\ProduitStats;
 use Filament\Enums\ThemeMode;
-use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -35,7 +32,11 @@ class AdminPanelProvider extends PanelProvider
             ->font('Poppins')
             ->breadcrumbs(false)
             ->defaultThemeMode(ThemeMode::System)
-            ->login()
+            ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
+            ->globalSearchDebounce('500ms')
+            ->plugins([
+
+            ])
             ->colors([
                 'danger' => Color::Rose,
                 'gray' => Color::Gray,
@@ -64,9 +65,6 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
-            ->brandName('GESTION HERVE SACS')
-            ->authMiddleware([
-//                Authenticate::class,
-            ]);
+            ->brandName('GESTION HERVE SACS');
     }
 }

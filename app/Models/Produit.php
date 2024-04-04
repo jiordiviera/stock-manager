@@ -4,17 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Casts\MoneyCast;
 
 class Produit extends Model
 {
     use HasFactory;
     protected $fillable = [
         'nom',
+        'quantite',
         'description',
         'image',
         'prix'
     ];
     protected $casts = [
+        'prix'=>MoneyCast::class,
         'image' => 'array',
     ];
 
@@ -26,5 +29,9 @@ class Produit extends Model
     public function arrivages()
     {
         return $this->hasMany(Arrivage::class);
+    }
+    public function getTotalQuantity(): int
+    {
+        return $this->quantite + $this->arrivage->sum('quantite_arrivee');
     }
 }

@@ -7,7 +7,7 @@ export default {
         './resources/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
     ],
-    darkMode: 'class',
+    darkMode: ['selector', '[data-mode="dark"]'],
     theme: {
         extend: {
             colors: {
