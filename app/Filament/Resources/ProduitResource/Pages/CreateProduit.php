@@ -8,5 +8,6 @@ use Filament\Resources\Pages\CreateRecord;
 
 class CreateProduit extends CreateRecord
 {
+    protected static ?string $title='Création d\'un nouveau produit';
     protected static string $resource = ProduitResource::class;
 }

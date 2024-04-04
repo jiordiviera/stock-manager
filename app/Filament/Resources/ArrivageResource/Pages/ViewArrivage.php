@@ -4,17 +4,16 @@ namespace App\Filament\Resources\ArrivageResource\Pages;
 
 use App\Filament\Resources\ArrivageResource;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\ViewRecord;
 
-class EditArrivage extends EditRecord
+class ViewArrivage extends ViewRecord
 {
     protected static string $resource = ArrivageResource::class;
-    protected static ?string $title='Arrivages';
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\EditAction::make(),
         ];
     }
 }

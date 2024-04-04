@@ -9,4 +9,7 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateVente extends CreateRecord
 {
     protected static string $resource = VenteResource::class;
+    protected static ?string $title = 'Ajouter une vente';
+
+
 }

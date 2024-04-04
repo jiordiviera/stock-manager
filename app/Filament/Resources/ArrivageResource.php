@@ -18,15 +18,24 @@ class ArrivageResource extends Resource
     protected static ?string $model = Arrivage::class;
 
     protected static ?string $navigationIcon = 'heroicon-s-arrow-down-circle';
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['produit.nom'];
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Select::make('produit_id')
+                    ->label('Nom du produit')
                     ->relationship('produit', 'nom')
+                    ->placeholder('Choisir un produit')
                     ->required(),
                 Forms\Components\TextInput::make('quantite_arrivée')
+                    ->label('Quantité de produit arrivée')
+                    ->placeholder('Entrez la quantité de produit arrivée ici')
+                    ->suffix('pièce(s)')
                     ->required()
                     ->numeric(),
             ]);
@@ -35,8 +44,10 @@ class ArrivageResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->emptyStateHeading('Aucun Arrivage')
             ->columns([
-                Tables\Columns\TextColumn::make('produit_id')
+                Tables\Columns\TextColumn::make('produit.nom')
+                    ->label('Produit')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('quantite_arrivée')
@@ -55,7 +66,14 @@ class ArrivageResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label('Modifier'),
+                Tables\Actions\DeleteAction::make()
+                    ->label('supprimer')
+                    ->modalHeading('Supprimer ce produit')
+                    ->modalDescription('Êtes vous sur de vouloir supprimer ces produits.')
+                    ->modalSubmitActionLabel('Oui, je le veux')
+                    ->modalCancelActionLabel('Annuler'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

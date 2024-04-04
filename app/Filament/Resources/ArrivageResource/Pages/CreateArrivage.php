@@ -9,4 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateArrivage extends CreateRecord
 {
     protected static string $resource = ArrivageResource::class;
+
+protected static ?string $title='Ajouter un arrivage';
 }

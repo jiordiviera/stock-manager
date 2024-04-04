@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('produit_id')->constrained('produits');
             $table->integer('quantite_vendue')->default(1);
-            $table->timestamps('date_vente');
-//            $table->timestamps();
+            $table->decimal('prix_vente', 10, 2);
+            $table->decimal('grand_total',10,2)->nullable();
+            $table->timestamps(); // Crée les colonnes 'created_at' and 'updated_at'
+
         });
     }
 

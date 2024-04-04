@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Resources\ArrivageResource\Widgets\ProduitStats;
+use App\Filament\Resources\VenteResource\Widgets\VenteChart;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Form;
 use Filament\Pages\Dashboard as BaseDashboard;
@@ -24,7 +25,7 @@ class TableauDeBord extends BaseDashboard
     protected function getHeaderWidgets(): array
     {
         return [
-            ProduitStats::class
+            ProduitStats::class,
         ];
     }
     protected function getHeaderActions(): array
